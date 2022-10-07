@@ -26,27 +26,31 @@ export default new Router({
       component: Auth
     },
     {
-      path: '/dashboard',
+      path: '/',
       name: 'Dashboard',
       component: Dashboard,
     },
     {
-      path: '/shop',
-      name: 'Shop',
-      component: () => import('./pages/Shop'),
+      path: '/products',
+      name: 'Products',
+      component: () => import('./pages/Products'),
 
     },
     {
-      path: '/devices',
-      name: 'Devices',
-      component: () => import('./pages/Devices'),
-
+      path: '/cart',
+      name: 'Cart',
+      component: () => import('./pages/Cart'),
+    },
+    {
+      path: '/users',
+      name: 'Users',
+      component: () => import('./pages/Users'),
     },
     {
       path: '/basket',
       name: 'Basket',
       component: () => import('./pages/Basket'),
-      beforeEnter: authGuard
+      // beforeEnter: authGuard
     }
   ]
 })

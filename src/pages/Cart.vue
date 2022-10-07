@@ -2,7 +2,7 @@
   <v-container fluid class="d-flex">
     <Menu/>
     <v-container class="mt-5 ml-5">
-      Devices
+      Cart
     </v-container>
   </v-container>
 </template>

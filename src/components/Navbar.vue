@@ -4,7 +4,7 @@
         color="indigo"
         dark
     >
-      <router-link class="logo" to="/dashboard">
+      <router-link class="logo" to="/">
         <div class="logo ml-10">
         Online Shop
       </div>
@@ -15,12 +15,13 @@
       </v-btn>
 
       <v-badge
-          :content="messages"
-          :value="messages"
+          :content="getProduct.length"
+          :value="getProduct.length"
           color="red"
           overlap
+          class="mr-5 ml-2"
       >
-        <v-icon >
+        <v-icon   @click="goToBasket">
           mdi-cart-variant
         </v-icon>
       </v-badge>
@@ -33,15 +34,24 @@
 <script>
 import {mapGetters, } from 'vuex'
 export default {
-  computed: mapGetters(['getAuth']),
+  computed: {
+    ...mapGetters([
+                    'getAuth',
+                    'getProduct'
+                  ])
+  },
   components: {
 
   },
   data () {
     return {
-      messages: 0,
     }
   },
+  methods: {
+    goToBasket() {
+      this.$router.push('/basket');
+    }
+  }
 };
 </script>
 
