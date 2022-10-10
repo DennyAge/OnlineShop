@@ -5,8 +5,8 @@ export default {
     product: []
   },
   mutations: {
-    getProducts(state, posts) {
-      state.products = posts
+    getProducts(state, product) {
+      state.products = product
     },
     getCategories(state, categories) {
       state.categories = categories

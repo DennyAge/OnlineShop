@@ -1,7 +1,7 @@
 <template >
   <v-container fluid class="d-flex">
     <Menu/>
-    <v-container  class="mt-5 ml-5">
+    <v-container  class="mt-5 ml-5 mr-5">
       <v-card>
         <v-tabs
             background-color="indigo"
@@ -20,6 +20,7 @@
            <v-btn class="add-btn" outlined @click="openModal"><v-icon>mdi-plus</v-icon></v-btn>
         </v-tabs>
         <v-tabs-items >
+          <PriceSlider/>
           <v-row class="list">
             <ProductsList
                 v-for="product in sortedProducts"
@@ -28,6 +29,24 @@
                 @addToBasket="addToBasket"
             />
           </v-row>
+          <v-snackbar
+              v-model="snackbar"
+              :multi-line="multiLine"
+              color="indigo"
+          >
+            Product add to Basket
+
+            <template v-slot:action="{ attrs }">
+              <v-btn
+                  color="red"
+                  text
+                  v-bind="attrs"
+                  @click="snackbar = false"
+              >
+                Close
+              </v-btn>
+            </template>
+          </v-snackbar>
         </v-tabs-items>
       </v-card>
     </v-container>
@@ -42,11 +61,14 @@ import Menu from '@/components/Menu';
 import {mapGetters, mapActions} from 'vuex'
 import ProductsList from '@/components/Products/ProductsList';
 import AddProduct from '@/components/Products/AddProduct';
+import PriceSlider from '@/components/Products/PriceSlider';
 export default {
   name: 'products',
   data: () => ({
     dialogVisible: false,
     sortedProducts: [],
+    multiLine: true,
+    snackbar: false,
   }),
   computed: mapGetters(['allProducts', 'allCategories']),
 
@@ -54,6 +76,7 @@ export default {
     ...mapActions(['fetchProducts', 'fetchCategories', 'addProductToBasket']),
     addToBasket(data) {
       this.addProductToBasket(data)
+      this.snackbar = true
     },
     openModal() {
       this.dialogVisible = true
@@ -69,7 +92,7 @@ export default {
       })
     }
   },
-  components: {AddProduct, ProductsList, Menu},
+  components: {PriceSlider, AddProduct, ProductsList, Menu},
   async mounted() {
     this.fetchProducts()
     this.fetchCategories()

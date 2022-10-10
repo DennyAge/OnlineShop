@@ -9,10 +9,17 @@
 
 <script>
 import Menu from '@/components/Menu';
+import {mapActions, mapGetters} from 'vuex';
 export default {
-  components: {Menu}
+  components: {Menu},
+  computed: mapGetters(['getCarts']),
+  methods: mapActions(['fetchCarts']),
+  async mounted() {
+    this.fetchCarts()
+  },
 };
 </script>
+
 
 <style scoped>
 

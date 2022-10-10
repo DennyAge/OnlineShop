@@ -1,11 +1,11 @@
 <template>
   <v-container fluid class="d-flex">
     <Menu/>
-    <v-container class="mt-5 ml-5">
+    <v-container class="mt-5 ml-5 mr-5">
        <div class="d-flex">
          <v-spacer/>
          <v-card class="d-flex justify-end total">
-           Total: {{productTotal}}
+           Total: {{productTotal | toFix}}
          </v-card>
        </div>
       <div v-if="!getProduct.length">There are no products in basket...</div>
@@ -22,12 +22,16 @@ import {mapGetters} from 'vuex'
 import Menu from '@/components/Menu';
 
 import ProductCart from '@/components/BasketPage/ProductCart';
+import toFix from '@/filters/toFix';
 export default {
   name: 'basket',
   components: {ProductCart, Menu},
   props: {},
   data() {
     return {}
+  },
+  filters: {
+    toFix
   },
   computed: {
     ...mapGetters([
