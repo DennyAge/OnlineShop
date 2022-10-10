@@ -5,7 +5,7 @@
       <v-data-table
           :headers="headers"
           :items="getUsers"
-          :items-per-page="All"
+          :items-per-page="10"
           class="elevation-1"
       ></v-data-table>
     </v-container>
