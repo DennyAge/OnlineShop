@@ -17,7 +17,9 @@ import Menu from '@/components/Menu';
 import {mapGetters, mapActions} from 'vuex'
 import PostForm from '@/components/PostForm';
 export default {
-  computed: mapGetters(['validPosts', 'postsCount']),
+  computed: {
+    ...mapGetters(['validPosts', 'postsCount']),
+  },
   methods: mapActions(['fetchPosts']),
   async mounted() {
    this.fetchPosts(9)

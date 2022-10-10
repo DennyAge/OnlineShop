@@ -3,18 +3,22 @@ export default {
     isAuth: false,
     user: {},
   },
-  mutations: {},
+  mutations: {
+    setLogin(state, isAuth) {
+      state.isAuth = isAuth
+    }
+  },
   getters: {
     getAuth(state) {
-      return state.auth
+      return state.isAuth
     },
     getUser(state) {
-      return state.auth
+      return state.user
     }
   },
   actions: {
-    setAuth() {
-
+    setAuth({commit}, isAuth) {
+      commit('setLogin', isAuth)
     },
     setUser() {
 

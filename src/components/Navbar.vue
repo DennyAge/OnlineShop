@@ -25,14 +25,15 @@
           mdi-cart-variant
         </v-icon>
       </v-badge>
-      <v-btn color="deep-orange" to="/registration" class="ml-3">Registration</v-btn>
-      <v-btn color="deep-orange" to="/login" class="ml-3">Login</v-btn>
+      <v-btn v-if="!isAuth" color="deep-orange" to="/registration" class="ml-3">Registration</v-btn>
+      <v-btn v-if="!isAuth" color="deep-orange" to="/login" class="ml-3">Login</v-btn>
+      <v-btn v-if="isAuth" color="deep-orange" to="/login" class="ml-3" @click.prevent="logout">Logout</v-btn>
     </v-app-bar>
   </v-container>
 </template>
 
 <script>
-import {mapGetters, } from 'vuex'
+import {mapActions, mapGetters,} from 'vuex';
 export default {
   computed: {
     ...mapGetters([
@@ -45,11 +46,17 @@ export default {
   },
   data () {
     return {
+      isAuth: localStorage.getItem('isAuth')
     }
   },
   methods: {
+    ...mapActions(['setAuth']),
     goToBasket() {
       this.$router.push('/basket');
+    },
+    logout() {
+      localStorage.clear()
+      window.location.href = '/';
     }
   }
 };

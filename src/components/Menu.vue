@@ -36,7 +36,7 @@ export default {
       items: [
         { title: 'Dashboard', icon: 'mdi-view-dashboard', link: '/' },
         { title: 'Products', icon: 'mdi-shopping-outline', link: '/products' },
-        // { title: 'Cart', icon: 'mdi-card-account-details-outline', link: '/cart' },
+        { title: 'Cart', icon: 'mdi-card-account-details-outline', link: '/cart' },
         { title: 'Users', icon: 'mdi-account-group-outline', link: '/users' },
         { title: 'Basket', icon: 'mdi-cart-variant', link: '/basket' },
       ],

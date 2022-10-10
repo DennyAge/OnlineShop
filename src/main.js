@@ -6,6 +6,7 @@ import store from './store'
 
 console.log(process.env.VUE_APP_API_URL);
 
+
 new Vue({
   vuetify,
   router,

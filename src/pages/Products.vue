@@ -82,7 +82,6 @@ export default {
       this.dialogVisible = true
     },
     sortByCategories(category) {
-      console.log(category);
       this.sortedProducts = []
       let vm = this
       this.allProducts.map((item) => {
