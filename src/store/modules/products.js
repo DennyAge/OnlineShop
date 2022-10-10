@@ -32,6 +32,14 @@ export default {
     },
     createProducts(state, products) {
       state.products.unshift(products)
+    },
+    increment(state, index) {
+      state.product[index].quantity++
+    },
+    decrement(state, index) {
+      if (state.product[index].quantity > 1){
+        state.product[index].quantity--
+      }
     }
   },
   getters: {
@@ -66,6 +74,12 @@ export default {
     },
     createNewProducts(commit) {
       commit('createProducts', products)
+    },
+    incrementProductItem({commit}, index) {
+      commit('increment', index)
+    },
+    decrementProductItem({commit}, index) {
+      commit('decrement', index)
     }
   }
 }

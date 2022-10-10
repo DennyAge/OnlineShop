@@ -9,7 +9,9 @@
         {{item_data.category}}
       </div>
       <div>
-        {{item_data.quantity}}
+        <v-icon @click="decrementItem">mdi-minus</v-icon>
+        {{ item_data.quantity }}
+        <v-icon @click="incrementItem">mdi-plus</v-icon>
       </div>
     </div>
     <div class="d-flex justify-space-between align-center mt-2">
@@ -25,6 +27,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'cart-item',
   props: {
@@ -40,12 +43,18 @@ export default {
   },
   computed: {},
   methods: {
-
     deleteFromBasket() {
       this.$emit('deleteFromBasket')
+    },
+    decrementItem() {
+      this.$emit('decrement')
+    },
+    incrementItem() {
+      this.$emit('increment')
     }
   },
   mounted() {
+    this.$set(this.item_data, 'quantity', 1)
   }
 };
 </script>

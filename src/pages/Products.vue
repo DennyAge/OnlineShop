@@ -7,7 +7,7 @@
             background-color="indigo"
             dark
         >
-          <v-tab>All</v-tab>
+          <v-tab @click="sortedProducts = allProducts">All</v-tab>
           <v-tab
               v-for="(categories, i) in allCategories"
               :key="categories.i"
@@ -22,7 +22,7 @@
         <v-tabs-items >
           <v-row class="list">
             <ProductsList
-                v-for="product in allProducts"
+                v-for="product in sortedProducts"
                 :key="product.id"
                 v-bind:products="product"
                 @addToBasket="addToBasket"
@@ -45,7 +45,8 @@ import AddProduct from '@/components/Products/AddProduct';
 export default {
   name: 'products',
   data: () => ({
-    dialogVisible: false
+    dialogVisible: false,
+    sortedProducts: [],
   }),
   computed: mapGetters(['allProducts', 'allCategories']),
 
@@ -57,13 +58,20 @@ export default {
     openModal() {
       this.dialogVisible = true
     },
-    sortByCategories(i) {
-      console.log(i);
+    sortByCategories(category) {
+      console.log(category);
+      this.sortedProducts = []
+      let vm = this
+      this.allProducts.map((item) => {
+        if (item.category === category) {
+          vm.sortedProducts.push(item)
+        }
+      })
     }
   },
   components: {AddProduct, ProductsList, Menu},
   async mounted() {
-    this.fetchProducts(12)
+    this.fetchProducts()
     this.fetchCategories()
   },
 };
