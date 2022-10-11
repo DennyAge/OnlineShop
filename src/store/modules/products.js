@@ -1,7 +1,11 @@
+import {$host} from '@/http';
+import products from '@/pages/Products';
+
 export default {
   state: {
     products: [],
     categories: [],
+    brands: [],
     product: []
   },
   mutations: {
@@ -10,6 +14,9 @@ export default {
     },
     getCategories(state, categories) {
       state.categories = categories
+    },
+    allBrands(state, brands) {
+      state.brands = brands
     },
     addProductToBasket(state, product) {
       if (state.product.length) {
@@ -46,25 +53,34 @@ export default {
     allProducts(state) {
       return state.products
     },
-    allCategories(state) {
+    allTypes(state) {
       return state.categories
     },
     getProduct(state) {
       return state.product
     },
+    getBrands(state) {
+      return state.brands
+    },
   },
   actions: {
-    async fetchProducts(ctx, limit) {
-      const res = await fetch(`https://fakestoreapi.com/products?limit=` + limit )
-      const products = await res.json()
-
+    async fetchDevices(ctx) {
+      const res = await $host.get('api/device' )
+      console.log(res);
+      const products = res.data.rows
       ctx.commit('getProducts', products)
     },
-    async fetchCategories(ctx) {
-      const res = await fetch('https://fakestoreapi.com/products/categories')
-      const categories = await res.json()
+    async fetchTypes(ctx) {
+      const res = await $host.get('api/type' )
+      const categories = res.data
 
       ctx.commit('getCategories', categories)
+    },
+    async fetchBrands(ctx) {
+      const res = await $host.get('api/brand' )
+      const brands = res.data
+
+      ctx.commit('allBrands', brands)
     },
     addProductToBasket({commit}, product) {
       commit('addProductToBasket', product)

@@ -1,12 +1,12 @@
 <template>
   <v-col md="4">
     <v-img
-        :src="`${item_data.image}`"
+        :src="`http://localhost:3000/${item_data.img}`"
         height="300"
     />
     <div class="d-flex justify-space-between mt-2">
       <div class="brand-name">
-        {{item_data.category}}
+        {{item_data.typeId}}
       </div>
       <div>
         <v-icon @click="decrementItem">mdi-minus</v-icon>
@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="d-flex justify-space-between align-center mt-2">
-      {{item_data.title}}
+      {{item_data.name}}
       <v-btn
           outlined
           @click="deleteFromBasket"

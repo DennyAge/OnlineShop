@@ -1,8 +1,8 @@
 <template>
-         <v-col md="4">
+         <v-col md="3">
              <v-img
-                 :src="`${products.image}`"
-                 height="300"
+                 :src="`http://localhost:3000/${products.img}`"
+                 height="350"
              />
             <div class="d-flex justify-space-between mt-2">
              <div class="brand-name">
@@ -14,7 +14,7 @@
              </div>
            </div>
            <div class="d-flex justify-space-between align-center mt-2">
-             {{products.title}}
+             {{products.name}}
             <v-btn
                 outlined
                 @click="addToBasket"

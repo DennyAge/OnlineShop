@@ -9,7 +9,6 @@ Vue.use(Router)
 const isAuth = localStorage.getItem('isAuth')
 
 const authGuard = (to, from, next) => {
-  console.log(localStorage.getItem('isAuth'));
   if (!isAuth) next({name: 'Login'})
   else next ()
 }
@@ -41,9 +40,9 @@ export default new Router({
 
     },
     {
-      path: '/cart',
-      name: 'Cart',
-      component: () => import('./pages/Cart'),
+      path: '/admin-tools',
+      name: 'AdminTools',
+      component: () => import('./pages/AdminTools'),
       beforeEnter: authGuard
     },
     {

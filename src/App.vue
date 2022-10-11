@@ -11,6 +11,7 @@
 
 
 import Navbar from '@/components/Navbar';
+import {mapActions} from 'vuex';
 export default {
   name: 'App',
 
@@ -21,7 +22,14 @@ export default {
   data: () => ({
     //
   }),
-  mounted() {
-  }
+  methods: {
+    ...mapActions(['fetchDevices', 'fetchTypes', 'fetchBrands']),
+  },
+
+  async mounted() {
+    this.fetchDevices()
+    this.fetchTypes()
+    this.fetchBrands()
+  },
 };
 </script>
