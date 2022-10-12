@@ -35,19 +35,19 @@
 <script>
 import {mapActions, mapGetters,} from 'vuex';
 export default {
+  name: 'nav-bar',
+  components: {},
+  props: {},
+  data () {
+    return {
+      isAuth: localStorage.getItem('isAuth')
+    }
+  },
   computed: {
     ...mapGetters([
                     'getAuth',
                     'getProduct'
                   ])
-  },
-  components: {
-
-  },
-  data () {
-    return {
-      isAuth: localStorage.getItem('isAuth')
-    }
   },
   methods: {
     ...mapActions(['setAuth']),
@@ -58,14 +58,16 @@ export default {
       localStorage.clear()
       window.location.href = '/';
     }
+  },
+  mounted() {
   }
 };
 </script>
 
 <style >
- .container {
-   padding: 0;
- }
+   .container {
+     padding: 0;
+   }
  .logo {
    text-decoration: none;
    font-size: 20px;

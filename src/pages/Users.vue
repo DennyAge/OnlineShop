@@ -16,6 +16,8 @@
 import Menu from '@/components/Menu';
 import {mapActions, mapGetters} from 'vuex';
 export default {
+  name: 'users-page',
+  components: {Menu},
   data() {
     return {
       headers: [
@@ -28,7 +30,6 @@ export default {
       ],
     }
   },
-  components: {Menu},
   computed: mapGetters(['getUsers']),
   methods: mapActions(['fetchUsers']),
   async mounted() {
@@ -38,6 +39,5 @@ export default {
 </script>
 
 <style scoped>
-  .table {
-  }
+
 </style>

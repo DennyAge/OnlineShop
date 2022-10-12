@@ -37,7 +37,12 @@ export default new Router({
       name: 'Products',
       component: () => import('./pages/Products'),
       beforeEnter: authGuard
-
+    },
+    {
+      path: '/device/:id',
+      name: 'Device',
+      component: () => import('./pages/DevicePage'),
+      beforeEnter: authGuard
     },
     {
       path: '/admin-tools',

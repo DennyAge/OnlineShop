@@ -4,7 +4,6 @@
     <v-card
         class="mx-auto mt-16 form"
         max-width="500"
-
     >
       <v-form>
         <h1 class="mb-5">Login</h1>
@@ -39,13 +38,13 @@ import {mapActions, mapGetters} from 'vuex';
 
 export default {
   name: 'login',
+  components: {},
+  props: {},
   data() {
     return {
       email: null,
       password: null,
     }
-  },
-  mounted() {
   },
   computed: mapGetters(['getAuth']),
   methods: {
@@ -59,7 +58,9 @@ export default {
                    window.location.href = '/';
                  })
     }
-  }
+  },
+  mounted() {
+  },
 };
 </script>
 
@@ -68,9 +69,6 @@ export default {
 .form {
   margin: 250px auto!important;
   padding: 25px;
-}
-.col-12 {
-  padding: 0;
 }
 .link {
   text-decoration: none;

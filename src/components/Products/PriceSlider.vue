@@ -44,13 +44,17 @@
 
 <script>
 export default {
+  name: 'price-slider',
+  components: {},
+  prop: {},
   data: () => ({
     min: 0,
     max: 1000,
     range: [0, 1000]
   }),
-  methods: {
-
+  computed: {},
+  methods: {},
+  mounted() {
   }
 };
 </script>

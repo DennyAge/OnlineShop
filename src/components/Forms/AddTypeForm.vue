@@ -63,6 +63,8 @@ import {mapGetters, mapMutations} from 'vuex';
 import {$host} from '@/http';
 
 export default {
+  name: 'add-type',
+  components: {},
   props: {
   },
   data: () => {
@@ -89,7 +91,8 @@ export default {
       await $host.post('api/type',  {
         name: this.name,
       }, )
-                 .then(res => {
+                 .then((res) => {
+                   console.log(res);
                    this.snackbar = true
                    this.resetForm()
                  })
@@ -98,13 +101,15 @@ export default {
       this.$refs.form.reset()
     }
   },
+  mounted() {
+  }
 };
 </script>
 
 <style scoped>
-.modal {
-  background-color: white;
-  padding: 100px;
-  max-width:50%;
-}
+  .modal {
+    background-color: white;
+    padding: 100px;
+    max-width:50%;
+  }
 </style>

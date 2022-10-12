@@ -63,8 +63,9 @@ import {mapGetters, mapMutations} from 'vuex';
 import {$host} from '@/http';
 
 export default {
-  props: {
-  },
+  name: 'add-brand',
+  components: {},
+  props: {},
   data: () => {
     return {
       name: '',
@@ -90,6 +91,7 @@ export default {
         name: this.name,
       }, )
                  .then(res => {
+                   console.log(res);
                    this.snackbar = true
                    this.resetForm()
                  })
@@ -98,6 +100,8 @@ export default {
       this.$refs.form.reset()
     }
   },
+  mounted() {
+  }
 };
 </script>
 

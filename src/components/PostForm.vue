@@ -9,10 +9,14 @@
 <script>
 import{ mapMutations } from 'vuex'
 export default {
+  name: 'post-form',
+  components: {},
+  props: {},
   data: () => ({
     title: '',
     body: ''
   }),
+  computed: {},
   methods: {
     ...mapMutations(['createPost']),
     submit() {
@@ -23,6 +27,8 @@ export default {
       })
       this.title = this.body = ''
     }
+  },
+  mounted() {
   }
 };
 </script>

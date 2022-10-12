@@ -48,7 +48,7 @@
           >
             <v-select
                 v-model="type"
-                :items="allTypes"
+                :items="getTypes"
                 item-text="name"
                 item-value="id"
                 color="blue darken-2"
@@ -105,6 +105,41 @@
           </v-btn>
         </template>
       </v-snackbar>
+      <hr/>
+      <v-btn
+          outlined
+          class="mt-5"
+          @click.prevent="addInfo"
+      >
+        add info</v-btn>
+      <v-row
+        v-for="(info, i) in info"
+        :key="i"
+      >
+        <v-col sm="5">
+          <v-text-field
+              v-model="title"
+              color="blue darken-2"
+              label="Title"
+              required
+          ></v-text-field>
+        </v-col>
+        <v-col sm="5">
+          <v-text-field
+              v-model="name"
+              color="blue darken-2"
+              label="Description"
+              required
+          ></v-text-field>
+        </v-col>
+        <v-col sm="2">
+          <v-btn
+              color="error"
+          >
+            Remove
+          </v-btn>
+        </v-col>
+      </v-row>
     </v-form>
     <div
         class="prevImage"
@@ -123,8 +158,9 @@ import {mapGetters, mapMutations} from 'vuex';
 import {$host} from '@/http';
 
 export default {
-  props: {
-  },
+  name: 'add-device',
+  components: {},
+  props: {},
   data: () => {
     return {
       name: '',
@@ -134,10 +170,12 @@ export default {
       type: '',
       multiLine: true,
       snackbar: false,
+      info: [],
+      setInfo: [],
     }
   },
   computed: {
-    ...mapGetters(['allTypes', 'getBrands']),
+    ...mapGetters(['getTypes', 'getBrands']),
     previewFilePath () {
       if (this.file) {
         return URL.createObjectURL(this.file)
@@ -174,25 +212,33 @@ export default {
                          }
                        })
                  .then(res => {
+                   console.log(res);
                    this.snackbar = true
                    this.resetForm()
                  })
     },
     resetForm() {
       this.$refs.form.reset()
+    },
+    addInfo() {
+      this.info = [
+        {title: '', description: '', number: Date.now }
+      ]
     }
   },
+  mounted() {
+  }
 };
 </script>
 
 <style scoped>
-.modal {
-  background-color: white;
-  padding: 100px;
-  max-width:50%;
-}
-.prevImage {
-  margin: 0 auto;
-  width: 50%;
-}
+  .modal {
+    background-color: white;
+    padding: 100px;
+    max-width:50%;
+  }
+  .prevImage {
+    margin: 0 auto;
+    width: 50%;
+  }
 </style>

@@ -17,6 +17,13 @@ import Menu from '@/components/Menu';
 import {mapGetters, mapActions} from 'vuex'
 import PostForm from '@/components/PostForm';
 export default {
+  name: 'dashboard-page',
+  components: {PostForm, Menu},
+  data() {
+    return {
+
+    }
+  },
   computed: {
     ...mapGetters(['validPosts', 'postsCount']),
   },
@@ -24,7 +31,6 @@ export default {
   async mounted() {
    this.fetchPosts(9)
   },
-  components: {PostForm, Menu}
 };
 </script>
 

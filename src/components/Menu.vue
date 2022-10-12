@@ -10,8 +10,8 @@
     >
       <v-list class="mt-10 ml-10">
         <v-list-item
-            v-for="item in items"
-            :key="item.title"
+            v-for="(item, i) in items"
+            :key="i"
             link
             router :to="item.link"
         >
@@ -31,6 +31,9 @@
 
 <script>
 export default {
+  name: 'navigation',
+  components: {},
+  props: {},
   data () {
     return {
       items: [
@@ -46,6 +49,10 @@ export default {
       ],
     }
   },
+  computed: {},
+  methods: {},
+  mounted() {
+  }
 }
 </script>
 

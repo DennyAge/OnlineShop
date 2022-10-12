@@ -45,6 +45,8 @@ import {$host} from '@/http';
 
 export default {
   name: 'registration',
+  components: {},
+  props: {},
   data() {
     return {
       email: null,
@@ -52,8 +54,7 @@ export default {
       // password_confirmation: null
     }
   },
-  mounted() {
-  },
+ computed: {},
   methods: {
   async  store() {
     await $host.post('api/user/registration', {email: this.email, password: this.password})
@@ -62,7 +63,9 @@ export default {
              this.$router.push('/login');
            })
     }
-  }
+  },
+  mounted() {
+  },
 };
 </script>
 
@@ -71,9 +74,6 @@ export default {
 .form {
   margin: 250px auto!important;
   padding: 25px;
-}
-.col-12 {
-  padding: 0;
 }
 .link {
   text-decoration: none;

@@ -1,23 +1,51 @@
 import {$host} from '@/http';
-import products from '@/pages/Products';
 
 export default {
   state: {
-    products: [],
-    categories: [],
+    devices: {
+      count: '',
+      rows: {}
+    },
+    types: [],
     brands: [],
+    selectedType: {},
+    selectedBrand: {},
+    device: {},
+    page: 1,
+    totalCount: 0,
+    limit: 3,
+
     product: []
   },
   mutations: {
-    getProducts(state, product) {
-      state.products = product
+    allDevices(state, product) {
+      state.devices = product
     },
-    getCategories(state, categories) {
-      state.categories = categories
+    allTypes(state, types) {
+      state.types = types
     },
     allBrands(state, brands) {
       state.brands = brands
     },
+    setSelectedType(state, type) {
+      state.selectedType = type
+    },
+    setSelectedBrand(state, brand) {
+      state.selectedBrand = brand
+    },
+    setOneDevice(state, device) {
+      state.device = device
+    },
+
+    setPage(state, page) {
+      state.page = page
+    },
+    setTotalCount(state, totalCount) {
+      state.totalCount = totalCount
+    },
+
+
+
     addProductToBasket(state, product) {
       if (state.product.length) {
         let isProductExists = false
@@ -37,8 +65,8 @@ export default {
     removeProduct(state, index) {
       state.product.splice(index, 1)
     },
-    createProducts(state, products) {
-      state.products.unshift(products)
+    createProducts(state, devices) {
+      state.devices.unshift(devices)
     },
     increment(state, index) {
       state.product[index].quantity++
@@ -50,46 +78,78 @@ export default {
     }
   },
   getters: {
-    allProducts(state) {
-      return state.products
+    getDevices(state) {
+      return state.devices.rows
     },
-    allTypes(state) {
-      return state.categories
-    },
-    getProduct(state) {
-      return state.product
+    getTypes(state) {
+      return state.types
     },
     getBrands(state) {
       return state.brands
     },
+    getSelectedType(state) {
+      return state.selectedType
+    },
+    getSelectedBrand(state) {
+      return state.selectedBrand
+    },
+    getOneDevice(state) {
+      return state.device
+    },
+
+    getPage(state) {
+      return state.page
+    },
+    getTotalCount(state) {
+      return  state.devices.count
+    },
+
+
+
+    getProduct(state) {
+      return state.product
+    },
   },
   actions: {
-    async fetchDevices(ctx) {
-      const res = await $host.get('api/device' )
-      console.log(res);
-      const products = res.data.rows
-      ctx.commit('getProducts', products)
+    async fetchDevices(ctx, limit = 6) {
+      const res = await $host.get(`api/device?limit=` + limit )
+      const devices = res.data
+      ctx.commit('allDevices', devices)
     },
     async fetchTypes(ctx) {
       const res = await $host.get('api/type' )
-      const categories = res.data
-
-      ctx.commit('getCategories', categories)
+      const types = res.data
+      ctx.commit('allTypes', types)
     },
-    async fetchBrands(ctx) {
-      const res = await $host.get('api/brand' )
+    async fetchBrands(ctx, typeId, brandId, page, limit = 6) {
+      const res = await $host.get('api/brand', {params: {
+          typeId, brandId, page, limit
+        }})
       const brands = res.data
-
       ctx.commit('allBrands', brands)
     },
+    async fetchOneDevice(ctx, id) {
+      const res = await $host.get('api/device/' + id )
+      const device = res.data
+      ctx.commit('setOneDevice', device)
+    },
+
+    selectedType({commit}, type) {
+      commit('setSelectedType', type)
+    },
+    selectedBrand({commit}, brand) {
+      commit('setSelectedBrand', brand)
+    },
+
+
+
+
+
     addProductToBasket({commit}, product) {
       commit('addProductToBasket', product)
     },
     deleteProductFromBasket({commit}, index) {
       commit('removeProduct', index)
-    },
-    createNewProducts(commit) {
-      commit('createProducts', products)
     },
     incrementProductItem({commit}, index) {
       commit('increment', index)

@@ -24,7 +24,7 @@ import Menu from '@/components/Menu';
 import ProductCart from '@/components/BasketPage/ProductCart';
 import toFix from '@/filters/toFix';
 export default {
-  name: 'basket',
+  name: 'basket-page',
   components: {ProductCart, Menu},
   props: {},
   data() {
@@ -56,7 +56,6 @@ export default {
 
   },
   methods: {
-
   },
   watch: {},
   mounted() {

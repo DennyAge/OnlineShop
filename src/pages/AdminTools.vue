@@ -46,26 +46,23 @@
 
 <script>
 import Menu from '@/components/Menu';
-import {mapActions, mapGetters} from 'vuex';
 import AddDeviceForm from '@/components/Forms/AddDeviceForm';
 import AddBrandForm from '@/components/Forms/AddBrandForm';
 import AddTypeForm from '@/components/Forms/AddTypeForm';
 export default {
+  name: 'admin-page',
+  components: {AddTypeForm, AddBrandForm, AddDeviceForm, Menu},
   data () {
     return {
       tab: null,
-      text: 'Lorem ipsum dolor sit amet',
     }
   },
-  components: {AddTypeForm, AddBrandForm, AddDeviceForm, Menu},
   computed: {
     tabSelected (e) {
-      console.log(e.tab);
       this.tab = e.tab
     }
   },
   methods: {
-
   },
   async mounted() {
   },
@@ -75,6 +72,6 @@ export default {
 
 <style scoped>
 .content {
-  height: 707px;
+  min-height: 707px;
 }
 </style>
